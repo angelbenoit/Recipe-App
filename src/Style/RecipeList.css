@@ -1,3 +1,28 @@
 .list{
     padding: 5px;
+    margin-left: 20%;
+    width: 700px;
+    word-wrap: break-word;
+    border: 1px solid gray;
+}
+
+@media only screen and (max-width: 1000px){
+    .list{
+        margin-left: 15%;
+        width: 400px;
+    }
+}
+@media only screen and (max-width: 500px){
+    .list{
+        margin-left: 5%;
+        width: 250px;
+    }
+}
+
+.showDetails{
+    visibility: visible;
+}
+
+.hideDetails{
+    visibility: hidden;
 }
