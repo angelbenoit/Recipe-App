@@ -1,0 +1,21 @@
+#modal{
+    margin-left: 30%;
+    padding-top: 10%;
+    height: 100px;
+}
+
+#btn{
+    border: none;
+    background-color: #7ec428;
+    color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 5%;
+}
+
+.formInput{
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+}
