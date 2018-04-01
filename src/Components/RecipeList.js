@@ -8,13 +8,10 @@ class RecipeList extends Component{
 
         this.state = {
             modalIsOpen: false,
-            recipeList: [],
-            //showDisplay will determine which item gets shown
-            showDisplay: -1
+            recipeList: []
         };
         this.renderItems = this.renderItems.bind(this);
         this.openModal = this.openModal.bind(this);
-        this.displayDetails = this.displayDetails.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.addRecipe = this.addRecipe.bind(this);
     };
@@ -39,26 +36,29 @@ class RecipeList extends Component{
         let data = [];
         this.state.recipeList.forEach((item, index) => {
             data.push(
-                //when user clicks on div, we will send the index to the state
-                <div key={index} onClick={() => this.displayDetails(index)}>
-                    <h1>{item.name}</h1>
-                    <p>{this.key}</p>
-                    {/*if index of the div matches the current state index, then it will be displayed*/}
-                    <div className={(index === this.state.showDisplay) ? "showDetails" : "hideDetails"}>
-                        <ul>
-                            {item.ingredients}
-                        </ul>
-                        <p>{item.instructions}</p>
+                <div className="container" key={index}>
+                        <h1>{item.name}</h1>
+
+                    <div className="overlay">
+                        <div className="item">
+                            <h1>{item.name}</h1>
+                            <h3>Ingredients:</h3>
+                            <ul>
+                                {item.ingredients}
+                            </ul>
+                            <h4>Instructions:</h4>
+                            <p>{item.instructions}</p>
+                            <div className="buttonRow">
+                                <button className="btn-2">Del</button>
+                                <button className="btn-2">Edit</button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             )
         });
         return data;
-    };
-
-    //if user clicks on div, then the state will be equal to the div's index
-    displayDetails = (index) => {
-        this.setState({showDisplay: index})
     };
 
     render(){

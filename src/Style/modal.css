@@ -4,15 +4,34 @@
     height: 100px;
 }
 
+#modal textarea, input, h2{
+    color: white;
+}
+::placeholder{
+    color: white;
+    font-size: 13px;
+}
+
+@media only screen and (max-width: 500px){
+    #modal{
+        margin-left: 0;
+    }
+}
+
 #btn{
     border: none;
-    background-color: #7ec428;
+    background-color: #76c46e;
     color: white;
-    border-radius: 5px;
+    border-radius: 3px;
     font-size: 20px;
     padding: 5px;
     margin-left: 5%;
 }
+
+#btn:hover{
+    background-color: #9df194;
+}
+
 
 .formInput{
     background: none;

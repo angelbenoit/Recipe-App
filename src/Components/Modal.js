@@ -49,11 +49,18 @@ class ModalComponent extends Component {
     }
 
     render(){
+        const customStyles = {
+            content : {
+                background: "#44a83f",
+                border: "5px solid black"
+            }
+        };
         return (
             <Modal
                 isOpen={this.props.modalIsOpen}
                 onRequestClose={this.props.closeModal}
                 contentLabel="Example Modal"
+                style={customStyles}
             >
                 <div id="modal">
                     <h2>Add A Recipe</h2>
