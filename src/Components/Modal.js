@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
+import uuid from 'uuid';
 import '../Style/modal.css';
 
 class ModalComponent extends Component {
@@ -20,6 +21,7 @@ class ModalComponent extends Component {
 
     componentWillMount() {
         Modal.setAppElement('body');
+        console.log(uuid());
     }
 
     getName(event) {
@@ -43,7 +45,8 @@ class ModalComponent extends Component {
         let recipe = {
             name: this.state.name,
             ingredients: this.state.ingredients,
-            instructions: this.state.instructions
+            instructions: this.state.instructions,
+            id: uuid()
         };
         this.props.addRecipe(recipe);
     }

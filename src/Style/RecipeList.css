@@ -1,53 +1,19 @@
-.item{
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-40%, -50%);
-    white-space: nowrap;
-    word-wrap: break-word;
+.title{
+    font-family: 'Playfair Display', serif;
     text-align: center;
-}
-
-.overlay {
-    position: absolute;
-    bottom: 0;
-    left: 100%;
-    right: 0;
-    background-color: #7ac43f;
-    overflow: hidden;
-    width: 80%;
-    height: 100%;
-    transition: .5s ease;
-}
-
-.container{
-    width: 80%;
     word-wrap: break-word;
 }
 
-.container:hover .overlay {
-    left: 30%;
-}
-
-.container h1:hover{
+.title:hover{
     text-decoration: underline;
+    color: lawngreen;
     cursor: pointer;
-    text-shadow: 2px 2px 2px #c2ffcb;
 }
 
-@media only screen and (max-width: 1000px){
-    .item{
-        font-size: 10px;
-        left: 45%;
-    }
-    .container:hover .overlay {
-        left: 20%;
-    }
-    .buttonRow{
-        float: left;
-        padding-left: 10%;
-    }
+.item{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    word-wrap: break-word;
 }
 
 ul   {padding-left:0;}
