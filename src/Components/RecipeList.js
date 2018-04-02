@@ -61,7 +61,6 @@ class RecipeList extends Component{
         const customStyles = {
             content : {
                 "background-color": "#CDFFCF",
-                height: '50%'
             }
         };
         let data = [];
