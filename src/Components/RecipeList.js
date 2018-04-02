@@ -44,8 +44,12 @@ class RecipeList extends Component{
         });
     };
 
-    deleteRecipe = () => {
-          
+    deleteRecipe = (id) => {
+          let filteredList = this.state.recipeList.filter(recipe => recipe.id !== id);
+          this.setState({
+              recipeList: filteredList,
+              recipeModalIsOpen: false
+          });
     };
 
     renderItems = () => {
@@ -75,7 +79,7 @@ class RecipeList extends Component{
                             <h4>Instructions:</h4>
                             <p>{item.instructions}</p>
                             <div className="buttonRow">
-                                <button className="btn-2" onClick={this.deleteRecipe}>Del</button>
+                                <button className="btn-2" onClick={() => this.deleteRecipe(item.id)}>Del</button>
                                 <button className="btn-2" onClick={this.closeRecipeModal}>close</button>
                                 <button className="btn-2">Edit</button>
                             </div>
