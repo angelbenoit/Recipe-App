@@ -44,6 +44,11 @@ class RecipeList extends Component{
         });
     };
 
+    editRecipe = (id, index) => {
+        let filteredList = this.state.recipeList.filter(recipe => recipe.id === id);
+
+    };
+
     deleteRecipe = (id) => {
           let filteredList = this.state.recipeList.filter(recipe => recipe.id !== id);
           this.setState({
@@ -62,8 +67,14 @@ class RecipeList extends Component{
         let data = [];
         this.state.recipeList.forEach((item, index) => {
             data.push(
-                <div key={index}>
+                <div key={index} className="recipeItem">
                     <h1 className="title" onClick={this.openRecipeModal}>{item.name}</h1>
+                    <div className="buttonRow">
+                        <div>
+                            <button className="btn-2" onClick={() => this.deleteRecipe(item.id)}>Del</button>
+                            <button className="btn-2">Edit</button>
+                        </div>
+                    </div>
                     <Modal
                         isOpen={this.state.recipeModalIsOpen}
                         onRequestClose={this.closeRecipeModal}
@@ -78,11 +89,7 @@ class RecipeList extends Component{
                             </ul>
                             <h4>Instructions:</h4>
                             <p>{item.instructions}</p>
-                            <div className="buttonRow">
-                                <button className="btn-2" onClick={() => this.deleteRecipe(item.id)}>Del</button>
-                                <button className="btn-2" onClick={this.closeRecipeModal}>close</button>
-                                <button className="btn-2">Edit</button>
-                            </div>
+                            <button className="btn-2" onClick={this.closeRecipeModal}>close</button>
                         </div>
                     </Modal>
                 </div>
@@ -94,7 +101,7 @@ class RecipeList extends Component{
     render(){
         let data = this.renderItems();
         return (
-            <div className="list">
+            <div>
                 <button id="add-recipe" onClick={this.openModal}>
                     <strong>+</strong> Add Recipe
                 </button>
