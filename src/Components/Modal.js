@@ -48,6 +48,7 @@ class ModalComponent extends Component {
             instructions: this.state.instructions,
             id: uuid()
         };
+        console.log(recipe);
         this.props.addRecipe(recipe);
     }
 

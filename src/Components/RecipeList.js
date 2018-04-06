@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditRecipe from './EditRecipe';
-import Modal from 'react-modal';
 import ModalComponent from './Modal';
+import ViewRecipe from './ViewRecipe';
 import '../Style/RecipeList.css';
 
 class RecipeList extends Component{
@@ -14,12 +14,15 @@ class RecipeList extends Component{
             editRecipeModalIsOpen: false,
             indexOfEditRecipe: -1,
             recipeToEdit: {},
+            recipeToView: {},
             recipeList: []
         };
+        this.handleEdit = this.handleEdit.bind(this);
         this.renderItems = this.renderItems.bind(this);
         this.openModal = this.openModal.bind(this);
         this.openRecipeModal = this.openRecipeModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.closeEditModal = this.closeEditModal.bind(this);
         this.closeRecipeModal = this.closeRecipeModal.bind(this);
         this.addRecipe = this.addRecipe.bind(this);
     };
@@ -32,8 +35,11 @@ class RecipeList extends Component{
         this.setState({modalIsOpen: false});
     }
 
-    openRecipeModal() {
-        this.setState({recipeModalIsOpen: true});
+    closeEditModal() {
+        this.setState({editRecipeModalIsOpen: false});
+    }
+    openRecipeModal(item) {
+        this.setState({recipeModalIsOpen: true, recipeToView: item});
     }
 
     closeRecipeModal() {
@@ -50,10 +56,12 @@ class RecipeList extends Component{
     // ===============EDIT======================
     editRecipe = (id, index) => {
         let filteredList = this.state.recipeList.filter(recipe => recipe.id === id);
+        console.log(filteredList);
         let filteredObject = {
             name: filteredList[0].name,
             ingredients: filteredList[0].ingredients,
-            instructions: filteredList[0].instructions
+            instructions: filteredList[0].instructions,
+            id: filteredList[0].id
         };
         this.setState({
             editRecipeModalIsOpen: true,
@@ -62,6 +70,14 @@ class RecipeList extends Component{
         });
     };
 
+    handleEdit = (recipe) => {
+        let newArr = this.state.recipeList;
+        newArr[this.state.indexOfEditRecipe] = recipe;
+        console.log(newArr);
+        this.setState({recipeList: newArr, editRecipeModalIsOpen: false});
+    };
+
+    //====================DELETE==============================
     deleteRecipe = (id) => {
           let filteredList = this.state.recipeList.filter(recipe => recipe.id !== id);
           this.setState({
@@ -80,31 +96,26 @@ class RecipeList extends Component{
         this.state.recipeList.forEach((item, index) => {
             data.push(
                 <div key={index} className="recipeItem">
-                    <h1 className="title" onClick={this.openRecipeModal}>{item.name}</h1>
+                    <h1 className="title" onClick={() => this.openRecipeModal(item)}>{item.name}</h1>
                     <div className="buttonRow">
                         <div>
                             <button className="btn-2" onClick={() => this.deleteRecipe(item.id)}>Del</button>
-                            <button className="btn-2" onClick={() => this.editRecipe(item, index)}>Edit</button>
+                            <button className="btn-2" onClick={() => this.editRecipe(item.id, index)}>Edit</button>
                         </div>
                     </div>
                     {/*this first modal is just to view the information on the recipe that user clicked on*/}
-                    <Modal
-                        isOpen={this.state.recipeModalIsOpen}
-                        onRequestClose={this.closeRecipeModal}
-                        contentLabel="Example Modal"
-                        style={customStyles}
-                    >
-                        <div className="item">
-                            <h1>{item.name}</h1>
-                            <h3>Ingredients:</h3>
-                            <ul>
-                                {item.ingredients}
-                            </ul>
-                            <h4>Instructions:</h4>
-                            <p>{item.instructions}</p>
-                            <button className="btn-2" onClick={this.closeRecipeModal}>close</button>
-                        </div>
-                    </Modal>
+                    <ViewRecipe
+                        recipe={this.state.recipeToView}
+                        recipeModalIsOpen={this.state.recipeModalIsOpen}
+                        closeRecipeModal={this.closeRecipeModal}
+                    />
+                    <EditRecipe
+                        handleEdit={this.handleEdit}
+                        closeEditModal={this.closeEditModal}
+                        editRecipeModalIsOpen={this.state.editRecipeModalIsOpen}
+                        recipeToEdit={this.state.recipeToEdit}
+                        indexOfEditRecipe={this.state.indexOfEditRecipe}
+                    />
                 </div>
             )
         });
@@ -124,11 +135,6 @@ class RecipeList extends Component{
                     modalIsOpen={this.state.modalIsOpen}
                     closeModal={this.closeModal}
                     addRecipe={this.addRecipe}
-                />
-                <EditRecipe
-                    recipe={this.state.recipeToEdit}
-                    isOpen={this.state.editRecipeModalIsOpen}
-                    index={this.state.indexOfEditRecipe}
                 />
             </div>
         )
