@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import '../Style/RecipeList.css';
 
+//when user clicks on the title of the recipe, this class will run
 class ViewRecipe extends Component{
     render(){
         return(

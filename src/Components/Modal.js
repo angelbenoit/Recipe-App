@@ -10,13 +10,15 @@ class ModalComponent extends Component {
             name: "",
             ingredients: [],
             id: "",
-            instructions: ""
+            instructions: "",
+            fillOut: false
         };
 
         this.getName = this.getName.bind(this);
         this.getIngredients = this.getIngredients.bind(this);
         this.getInstructions = this.getInstructions.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.resetState = this.resetState.bind(this);
     }
 
     componentWillMount() {
@@ -49,8 +51,24 @@ class ModalComponent extends Component {
             id: uuid()
         };
         console.log(recipe);
-        this.props.addRecipe(recipe);
+        //if the user did not enter any data, the submit button won't work
+        //if the user entered data, the recipe will be added to recipe array list and the state
+        //of this class will be reset
+        if((recipe.name.length > 0) && (recipe.ingredients.length > 0) && (recipe.instructions.length > 0)){
+            this.props.addRecipe(recipe);
+            this.resetState();
+        }
     }
+
+    resetState = () => {
+      this.setState({
+            name: "",
+            ingredients: [],
+            id: "",
+            instructions: "",
+            fillOut: false
+      })
+    };
 
     render(){
         const customStyles = {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import '../Style/RecipeList.css';
+import "../Style/EditRecipe.css";
 
 class EditRecipe extends Component{
     constructor(props){
@@ -36,7 +36,8 @@ class EditRecipe extends Component{
     render(){
         const customStyles = {
             content: {
-                "background-color": "#CDFFCF",
+                "background-color": "#c3e8cb",
+                "color": "#324135",
             }
         };
         return(
@@ -48,7 +49,7 @@ class EditRecipe extends Component{
             >
                 <div className="item">
 
-                    <form>
+                    <form className="edit">
                         <input onChange={this.editName} className="formInput" type="text" placeholder="Recipe Name"/><br/><br/>
                         <textarea
                             onChange={this.editIngredients}
